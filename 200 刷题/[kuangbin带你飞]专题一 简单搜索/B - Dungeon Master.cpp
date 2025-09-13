@@ -17,16 +17,18 @@ int d[32][32][32];
 
 queue<LRC> search_que;
 int L,R,C;
-
+int cnt=0;
 void solve()
 {
     int x,y,z;
     //压进队列的要求：不超过边界，没有访问过，
-    while(!search_que.empty())
+    while(!search_que.empty() && cnt <= 50)
     {
         cout<<"Now we go into the while loop"<<endl;
         current = search_que.front();
         search_que.pop();
+        cout<<"Now we pop one item from the que"<<endl;
+        cnt++;
         for(int i = 0; i < 6; i++)
         {
             z = current.first + dz[i];
@@ -44,6 +46,7 @@ void solve()
                     return;
                 }
                 search_que.push(LRC(z, RC(x, y)));
+                cout<<"Now we push one item to the que"<<endl;
                 //跳出条件，遇到终点，否则队列跑完还没出来就是trapped
             }
         }
@@ -65,6 +68,7 @@ int main()
                 if(map[k][i][j] == 'S')
                 {
                     start_point = LRC(k,RC(i,j));
+                    d[k][i][j] = 0;
                     search_que.push(start_point);
                 }
                 if(map[k][i][j] == 'E')
