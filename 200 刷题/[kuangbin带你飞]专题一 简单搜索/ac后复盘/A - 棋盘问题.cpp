@@ -1,0 +1,51 @@
+#include <iostream>
+using namespace std;
+char map[9][9];
+long long ans;
+int n,k;
+int cnt = 0;
+void solve(int left_piece, int line)
+{
+    for(int i = line; i <= n - left_piece; i++)
+    {
+        for(int l = 0; l < n; l++)
+        {
+            if(map[i][l] == '#' && map[8][l] != 'u')
+            {
+                if(left_piece == 0) ans++;
+                else
+                {
+                    map[8][l] = 'u';
+                    solve(left_piece - 1, i + 1);
+                    map[8][l] = 'n';
+                }
+            }
+        }
+    }
+    return;
+}
+int main()
+{
+    cin>>n>>k;
+    while(n != -1)
+    {
+        ans = 0;
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < n; j++)
+            {
+                cin>>map[i][j];
+            }
+            map[8][i] = 'n';
+        }
+        solve(k , 0);
+        cout<<ans<<endl;
+        cin>>n>>k;
+    }
+    return 0;
+}
+
+//首先我们采用的是深度优先搜索，每一行每一行往下看（这是因为我们知道这一行一旦放了一个棋子就不能用了）
+//被使用过的列我们通过map[8][]来标记，当然也有别人的做法是另开一个数组看有没有用
+//在考虑状态回溯的时候，我们知道每一列只能用一次，这意味着我们只需要在确定“放在这一列”的时候标记，然后回溯的时候清除标记即可
+//要注意递归函数的设计，我们这里就遇到了第一列的位置要另外搜索，以及最后一列没有安排位置的问题
