@@ -5,19 +5,19 @@
 #include <iostream>
 #include <queue>
 using namespace std;
-const int MAXN = 16;
+const int MAXN = 20;
 int N,M;
 bool map[MAXN][MAXN];
 bool ans[MAXN][MAXN];
 int dx[3] = {-1, 0, 1};
 void output_map()
 {
-    cout<<endl;
+    //cout<<endl;
     for(int i = 0; i < N; i++)
     {
         for(int j = 0; j < M; j++)
         {
-            cout<<map[i][j]<<" ";
+            cout<<ans[i][j]<<" ";
         }
         cout<<endl;
     }
@@ -30,13 +30,9 @@ bool reverse(int a)
 void flip(int depth, int k)
 {
     int nx;
-    for(int i = 0; i < 2; i++)
+    for(int i = 0; i <= 2; i++)
     {
         nx = dx[i] + k;
-        if(nx >= 0 && nx < M)
-        {
-            map[depth][nx] = reverse(map[depth][nx]);
-        }
         if(nx >= 0 && nx < M)
         {
             map[depth][nx] = reverse(map[depth][nx]);
@@ -89,7 +85,7 @@ int main()
         }
     }
     solve(1);
-    output_map();
+    //output_map();
 }
 
 //猜测：涉及最小次数，采用宽度优先搜索
