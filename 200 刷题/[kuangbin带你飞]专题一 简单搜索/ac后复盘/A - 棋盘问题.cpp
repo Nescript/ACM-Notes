@@ -6,12 +6,20 @@ int n,k;
 int cnt = 0;
 void solve(int left_piece, int line)
 {
+    cout<<"now is outside the loop of solve"<<endl;
+    cout<<"now the left piece is "<<left_piece<<endl;
+    cout<<"now the line is "<<line<<endl;
+    cout<<endl;
     for(int i = line; i <= n - left_piece; i++)
     {
         for(int l = 0; l < n; l++)
         {
             if(map[i][l] == '#' && map[8][l] != 'u')
             {
+                cout<<"now is inside the loop of solve"<<endl;
+                cout<<"now the left piece is "<<left_piece<<endl;
+                cout<<"now the line is "<<line<<endl;
+                cout<<endl;
                 if(left_piece == 0) ans++;
                 else
                 {
