@@ -6,21 +6,13 @@ int n,k;
 int cnt = 0;
 void solve(int left_piece, int line)
 {
-    cout<<"now is outside the loop of solve"<<endl;
-    cout<<"now the left piece is "<<left_piece<<endl;
-    cout<<"now the line is "<<line<<endl;
-    cout<<endl;
     for(int i = line; i <= n - left_piece; i++)
     {
         for(int l = 0; l < n; l++)
         {
             if(map[i][l] == '#' && map[8][l] != 'u')
             {
-                cout<<"now is inside the loop of solve"<<endl;
-                cout<<"now the left piece is "<<left_piece<<endl;
-                cout<<"now the line is "<<line<<endl;
-                cout<<endl;
-                if(left_piece == 0) ans++;
+                if(left_piece == 1) ans++;
                 else
                 {
                     map[8][l] = 'u';
@@ -57,3 +49,7 @@ int main()
 //被使用过的列我们通过map[8][]来标记，当然也有别人的做法是另开一个数组看有没有用
 //在考虑状态回溯的时候，我们知道每一列只能用一次，这意味着我们只需要在确定“放在这一列”的时候标记，然后回溯的时候清除标记即可
 //要注意递归函数的设计，我们这里就遇到了第一列的位置要另外搜索，以及最后一列没有安排位置的问题
+
+//相比原本的代码，这里修改了递归函数，使得第一个棋子也可以直接在函数内搜索放在哪一行
+//具体来说，之前的代码的solve接受“放了这个棋子还剩几个”以及“这个棋子放哪一行”
+//现在改成了更符合直觉的“这个棋子从第几行开始放”和“包括这个棋子在内还有几个棋子”
